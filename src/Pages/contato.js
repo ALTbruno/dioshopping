@@ -84,7 +84,7 @@ const Contatos = () => {
                     <div className="card mt-2" key={content.id}>
                         <div className="card-body">
                             <h5 className="card-title">{content.name}</h5>
-                            <h6 className="card-mail">{content.email}</h6>
+                            <h6 className="card-mail">{content.email.replace(/(\w{2})[\w.-]+@([\w.]+\w)/, "$1*****@$2")}</h6>
                             <p className="card-text">{content.message}</p>
                             <p className="card-text"><small className="text-muted">{content.created_at}</small></p>
                         </div>
