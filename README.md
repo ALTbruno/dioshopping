@@ -9,4 +9,4 @@ Integrando Back-end em Node.js com Front-end em React na página de contato de u
 5. npm i
 6. npm start
 
-![Página de contato](./img/2022-01-03.png)
+![Página de contato](./2022-01-03.png)
