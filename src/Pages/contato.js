@@ -6,6 +6,7 @@ const Contatos = () => {
     const url = 'http://localhost:5000/message'
     const [message, setMessage] = useState([]);
     const [author, setAuthor] = useState('');
+    const [email, setEmail] = useState('');
     const [content, setContent] = useState('');
     const [validator, setValidator] = useState(false);
     const [render, setRender] = useState(false);
@@ -19,11 +20,12 @@ const Contatos = () => {
 
     const sendMessage = () => {
         setValidator(false);
-        if(author.length <= 0 || content.length <= 0){
+        if(author.length <= 0 || email.length <= 0 || content.length <= 0){
             return setValidator(!validator)
         }
         const bodyForm = {
-            email: author,
+            name: author,
+            email: email,
             message: content,
         }
 
@@ -46,6 +48,7 @@ const Contatos = () => {
         })
         
         setAuthor('');
+        setEmail('');
         setContent('');
         
         console.log(content)
@@ -54,8 +57,9 @@ const Contatos = () => {
     return(
         <>
             <Grid container direction="row" xs={12}>
-                <TextField id="name" label="Name" value={author} onChange={(event)=>{setAuthor(event.target.value)}} fullWidth/>
-                <TextField id="message" label="Message" value={content} onChange={(event)=>{setContent(event.target.value)}} fullWidth/>
+                <TextField id="name" label="Nome" value={author} onChange={(event)=>{setAuthor(event.target.value)}} fullWidth/>
+                <TextField id="email" label="E-mail" value={email} onChange={(event)=>{setEmail(event.target.value)}} fullWidth/>
+                <TextField id="message" label="Mensagem" value={content} onChange={(event)=>{setContent(event.target.value)}} fullWidth/>
             </Grid>
 
             {validator && 
@@ -72,14 +76,15 @@ const Contatos = () => {
             }
 
             <Button onClick={sendMessage} className="mt-2" variant="contained" color="primary">
-                Sent
+                Enviar
             </Button>
 
             {message.map((content) => {
                 return(
                     <div className="card mt-2" key={content.id}>
                         <div className="card-body">
-                            <h5 className="card-title">{content.email}</h5>
+                            <h5 className="card-title">{content.name}</h5>
+                            <h6 className="card-mail">{content.email}</h6>
                             <p className="card-text">{content.message}</p>
                             <p className="card-text"><small className="text-muted">{content.created_at}</small></p>
                         </div>
